@@ -125,7 +125,7 @@ int main()
 {
     LinkedList *head_adress;    //定义一个指向头节点的指针
     head_adress = (LinkedList*)malloc(sizeof(LinkedList)); 
-	int node;
+	int node=0;
 	draw3();
 	system("pause");
 	system("cls");
@@ -148,9 +148,6 @@ int main()
 			break;
             }
         case(2):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空");
-        		break;}
         	printf("输入你要加的节点的个数：");  //用户输入想要的节点数目
     		scanf("%d",&node);
     		head_adress=Create_list_tail(head_adress,node);
@@ -169,10 +166,18 @@ int main()
         case(4):{
         	if((*head_adress)->next==NULL || (*head_adress==NULL)|| head_adress==NULL){  //对空链表进行处理
         		printf("该链表为空");
+        		system("pause");
+				system("cls");
         		break;}
             int judge;
             LinkedList Index2,q;
             Index2 = (LinkedList)malloc(sizeof(LNode));
+            if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
             printf("输入你要插在第几个节点后(0<x<%d)",node+1);
             scanf("%d",&judge);                    ////想法：用户先输入想要操作的节点的位置
             while(judge<1 || judge>node+1){
@@ -188,6 +193,17 @@ int main()
             break;
             }
         case(5):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 	
             int judge;
             LinkedList Index3;
             int *e;
@@ -207,12 +223,34 @@ int main()
             break;
             }
         case(6):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
             PrintList(*head_adress);   //输出每个值
             system("pause");
 			system("cls");
             break;
             }
         case(7):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
             int value;
             puts("输入你想要查询的值：");
             scanf("%d",&value);
@@ -222,6 +260,17 @@ int main()
             break;
             }
         case(8):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
             ReverseList(head_adress);  //倒序节点
             PrintList(*head_adress);
             system("pause");
@@ -229,12 +278,34 @@ int main()
             break;
             }
         case(9):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
 			IsLoopList(*head_adress);  //判断是否是环
             system("pause");
 	        system("cls");
             break;
             }
         case(10):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
             *head_adress=ReverseEvenList(head_adress); //两个节点两两交换
             system("pause");
             PrintList(*head_adress);
@@ -243,6 +314,17 @@ int main()
             break;
             }
         case(11):{
+        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
+        		printf("该链表为空\n");
+        		system("pause");
+				system("cls");
+        		break;}
+        	if (node==0) {
+            	printf("该链表为空。\n");
+            	system("pause");
+				system("cls");
+            	break;
+			} 
             LinkedList low;      //定义慢指阵
             low=(LinkedList)malloc(sizeof(LNode));
             low=FindMidNode(head_adress);
