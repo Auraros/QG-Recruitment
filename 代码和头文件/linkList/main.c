@@ -141,7 +141,7 @@ int main()
     draw4();
     int number2;
     scanf("%d",&number2);
-    while(number2<1 || number2>10)
+    while(number2<1 || number2>11)
     {
         puts("请重新输入正确的数字：");
         scanf("%d",&number2);
