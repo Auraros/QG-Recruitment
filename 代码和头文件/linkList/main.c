@@ -61,11 +61,11 @@ LinkedList IndexList(LinkedList head, int n)
  *	@return		 : head
  *  @notice      : None
  */
-LinkedList *Create_list_tail (LinkedList *head, int number)
+LinkedList Create_list_tail (LinkedList head, int number)
 {
 	LinkedList node=NULL;
 	LinkedList end= NULL;
-	end = *head;
+	end = head;
 	node=end;
 	int num,i;
 	for(i=0;i<number;i++)
@@ -78,7 +78,7 @@ LinkedList *Create_list_tail (LinkedList *head, int number)
 		end=node;
 	}
 	end->next=NULL;
-	*head=(*head)->next;
+	head=head->next;
 	return head;
  }
 
@@ -91,8 +91,9 @@ void draw3()
 {
 	printf("\t|**********************************************|\n");
 	printf("\t|*              单链表ATD                     *|\n");
-	printf("\t|*           首先需要添加链表                 *|\n");
-	printf("\t|*          方法:先初始化链表再添加链表       *|\n");
+	printf("\t|*                                            *|\n");
+	printf("\t|*           首先先初始化链表                 *|\n");
+	printf("\t|*     0:是               1：退出程序         *|\n"); 
 	printf("\t|**********************************************|\n");
 }	
 
@@ -103,30 +104,36 @@ void draw3()
 void draw4()
 {
 	printf("\t|**********************************************|\n");
-	printf("\t|*          1.链表的初始化。                  *|\n");
-	printf("\t|*          2.插入想要的数据                  *|\n"); 
-	printf("\t|*          3.销毁链表。                      *|\n");
-	printf("\t|*          4.插入节点。                      *|\n");
-	printf("\t|*          5.删除节点后一个并赋值。          *|\n");
-	printf("\t|*          6.遍历输出链表。                  *|\n");
-	printf("\t|*          7.查询链表。                      *|\n");
-	printf("\t|*          8.链表的逆序。                    *|\n");
-	printf("\t|*          9.判断是否为循环链表。            *|\n");
-	printf("\t|*          10.颠倒偶数节点。                 *|\n");
-	printf("\t|*          11.寻找中间节点。                 *|\n");
-	printf("\t|*          12.退出程序。                     *|\n");
+	printf("\t|*             操作                           *|\n");
+	printf("\t|*          1.插入想要的数据                  *|\n"); 
+	printf("\t|*          2.销毁链表并退出程序              *|\n");
+	printf("\t|*          3.插入节点                        *|\n");
+	printf("\t|*          4.删除节点后一个并赋值            *|\n");
+	printf("\t|*          5.遍历输出链表                    *|\n");
+	printf("\t|*          6.查询链表                        *|\n");
+	printf("\t|*          7.链表的逆序。                    *|\n");
+	printf("\t|*          8.判断是否为循环链表              *|\n");
+	printf("\t|*          9.颠倒偶数节点                    *|\n");
+	printf("\t|*          10.寻找中间节点                   *|\n");
+	printf("\t|*          11.退出程序                       *|\n");
 	printf("\t|**********************************************|\n");
-	printf("请输入所选的序号(1-10):\n");
+	printf("请输入所选的序号(1-11):\n");
 }
 
 
 
 int main()
 {
-    LinkedList *head_adress;    //定义一个指向头节点的指针
-    head_adress = (LinkedList*)malloc(sizeof(LinkedList)); 
-	int node=0;
+    LinkedList head_adress;    //定义一个指向头节点的指针
+	int node=0,judge;
 	draw3();
+	scanf("%d",&judge);
+	if(judge==0){
+		InitList(&head_adress);
+	}
+	else {
+		return 0;
+	}
 	system("pause");
 	system("cls");
 	int i=0;
@@ -141,69 +148,52 @@ int main()
     }
     switch(number2)
     {
+        
         case(1):{
-            InitList(head_adress);  //初始化链表
-            system("pause");           
-			system("cls");
-			break;
-            }
-        case(2):{
         	printf("输入你要加的节点的个数：");  //用户输入想要的节点数目
     		scanf("%d",&node);
     		head_adress=Create_list_tail(head_adress,node);
 			printf("你所建立的链表为：\n");
-			PrintList(*head_adress);    //输出用户建立的链表
+			PrintList(head_adress);    //输出用户建立的链表
 			system("pause");
 			system("cls");
 			break;
 			}
-        case(3):{
-            DestroyList(head_adress); //摧毁链表
+        case(2):{
+            DestroyList(&head_adress); //摧毁链表
             system("pause");
 			system("cls");
 			return 0;
             }
-        case(4):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)|| head_adress==NULL){  //对空链表进行处理
-        		printf("该链表为空");
+        case(3):{
+        	if(head_adress->next==NULL || head_adress==NULL){  //对空链表进行处理
+        		printf("该链表为空,请先插入数据");
         		system("pause");
 				system("cls");
         		break;}
             int judge;
             LinkedList Index2,q;
             Index2 = (LinkedList)malloc(sizeof(LNode));
-            if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
             printf("输入你要插在第几个节点后(0<x<%d)",node+1);
             scanf("%d",&judge);                    ////想法：用户先输入想要操作的节点的位置
             while(judge<1 || judge>node+1){
                 puts("请重新输入正确的数字：");
                 scanf("%d",&judge);
             }
-            Index2=IndexList( *head_adress,  judge);   //利用索引返回该节点的指针
+            Index2=IndexList( head_adress,  judge);   //利用索引返回该节点的指针
             q = (LinkedList)malloc(sizeof(LNode));
             InsertList(Index2, q);              //利用该指针进行操作
-            PrintList(*head_adress);
+            PrintList(head_adress);
             system("pause");
 			system("cls");
             break;
             }
-        case(5):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
+        case(4):{
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
         		system("pause");
 				system("cls");
-        		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 	
+        		break;}	
             int judge;
             LinkedList Index3;
             int *e;
@@ -215,125 +205,88 @@ int main()
                 puts("请重新输入正确的数字：");
                 scanf("%d",&judge);
             }
-            Index3=IndexList(*head_adress, judge);
-            DeleteList(Index3, e);    //这里的话e，我还没想到要如何使用
-            PrintList(*head_adress);
+            Index3=IndexList(head_adress, judge-1);
+            DeleteList(Index3);    //这里的话e，我还没想到要如何使用
+            PrintList(head_adress);
+            system("pause");
+			system("cls");
+            break;
+            }
+        case(5):{
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
+        		system("pause");
+				system("cls");
+        		break;} 
+            PrintList(head_adress);   //输出每个值
             system("pause");
 			system("cls");
             break;
             }
         case(6):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
         		system("pause");
 				system("cls");
-        		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
-            PrintList(*head_adress);   //输出每个值
+        		break;} 
+            int value;
+            puts("输入你想要查询的值：");
+            scanf("%d",&value);
+            SearchList(head_adress, value);   //找出用户要找的节点，否则输出没有
             system("pause");
 			system("cls");
             break;
             }
         case(7):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
         		system("pause");
 				system("cls");
         		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
-            int value;
-            puts("输入你想要查询的值：");
-            scanf("%d",&value);
-            SearchList(*head_adress, value);   //找出用户要找的节点，否则输出没有
+            ReverseList(&head_adress);  //倒序节点
+            PrintList(head_adress);
             system("pause");
 			system("cls");
             break;
             }
         case(8):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
         		system("pause");
 				system("cls");
         		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
-            ReverseList(head_adress);  //倒序节点
-            PrintList(*head_adress);
-            system("pause");
-			system("cls");
-            break;
-            }
-        case(9):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
-        		system("pause");
-				system("cls");
-        		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
-			IsLoopList(*head_adress);  //判断是否是环
+			IsLoopList(head_adress);  //判断是否是环
             system("pause");
 	        system("cls");
             break;
             }
-        case(10):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
+        case(9):{
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
         		system("pause");
 				system("cls");
         		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
-            *head_adress=ReverseEvenList(head_adress); //两个节点两两交换
-            system("pause");
-            PrintList(*head_adress);
+            head_adress=ReverseEvenList(&head_adress); //两个节点两两交换
+            PrintList(head_adress);
             system("pause");
 			system("cls");
             break;
             }
-        case(11):{
-        	if((*head_adress)->next==NULL || (*head_adress==NULL)){  
-        		printf("该链表为空\n");
+        case(10):{
+        	if(head_adress->next==NULL || head_adress==NULL){  
+        		printf("该链表为空,请先插入数据\n");
         		system("pause");
 				system("cls");
-        		break;}
-        	if (node==0) {
-            	printf("该链表为空。\n");
-            	system("pause");
-				system("cls");
-            	break;
-			} 
+        		break;} 
             LinkedList low;      //定义慢指阵
             low=(LinkedList)malloc(sizeof(LNode));
-            low=FindMidNode(head_adress);
+            low=FindMidNode(&head_adress);
             printf("%d",low->data);
             system("pause");
 			system("cls");
             break;
             }
-        case(12):{
+        case(11):{
         	return 0;
 		}
 

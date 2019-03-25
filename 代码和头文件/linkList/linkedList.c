@@ -68,7 +68,7 @@ Status InsertList(LNode *p, LNode *q) {
  *	@return		 : Status
  *  @notice      : None
  */
-Status DeleteList(LNode *p, ElemType *e){
+Status DeleteList(LinkedList p){
 	if(p!=NULL)
 	{
 	    //先将值赋值给指针，在进行链表操作，可是在操作过程中出现了错误。暂时还没有解决

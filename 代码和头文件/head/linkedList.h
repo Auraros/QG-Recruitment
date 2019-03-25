@@ -82,7 +82,7 @@ Status InsertList(LNode *p, LNode *q);
  *	@return		 : Status
  *  @notice      : None
  */
-Status DeleteList(LNode *p, ElemType *e);
+Status DeleteList(LNode *p);
 
 /**
  *  @name        : void TraverseList(LinkedList L, void (*visit)(ElemType e))
