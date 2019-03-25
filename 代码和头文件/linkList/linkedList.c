@@ -10,9 +10,13 @@
  *  @notice      : None
  */
 Status InitList(LinkedList  *L) {
-     (*L)=NULL;
-     printf("初始化成功。");  //初始化链表
-	 return SUCCESS;
+     (*L)=(LNode *)malloc(sizeof(LNode)); 
+     if(*L==NULL){    //判断头节点是否为NULL 
+     	printf("\n内存分配失败。\n");
+		 exit(-1); 
+	 }
+	 (*L)->next=NULL;
+	 printf("初始化成功。");
 }
 
 /**
@@ -24,12 +28,15 @@ Status InitList(LinkedList  *L) {
  */
 void DestroyList(LinkedList *L) {
 	LinkedList psave;
+	if((*L)->next==NULL || (*L)==NULL)  //对空链表进行处理
+        printf("该链表为空");
     while(*L)     /*使用循环遍历整个链表，使用free函数对每一个结点进行释放*/
     	{
     	    psave=(*L)->next;
     	    free(*L);
     	    *L=psave;
     	}
+    free(*L); 
     printf("销毁成功。");
 }
 
