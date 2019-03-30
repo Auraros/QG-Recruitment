@@ -7,8 +7,7 @@ typedef enum Status {
 
 typedef int ElemType;
 
-typedef  struct StackNode
-{
+typedef  struct StackNode{
 	ElemType data;
 	struct StackNode *next;
 }StackNode, *LinkStackPtr;
