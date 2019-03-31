@@ -64,6 +64,8 @@ Status GetMidStack(sqStack *s, char* str){
             d.number.sign = *cur;  //将cur存入栈中 
             if (isdigit(*(cur + 1)))  //如果cur下一个是数字，就将start指向它 
                 start = cur + 1;
+            else if(*cur == '(' && *(cur+1) == '-')
+            	start = cur + 1;
             Push(s, d);
         }
         cur++;
@@ -209,4 +211,63 @@ Status GetBackValue(sqStack *s, double* val)
     *val = value;
     DestroyStack(&OpValSk);
     return OK;
+}
+
+Status norGetBackStack(char *str){ //获取正确的后缀表达式 
+	char *cur = str, *start, *end;
+	char fnum[10] = {0};
+	sqStack BackStack;
+	int i;
+	data d,top;
+	char pc,pb;
+	if (!str || !InitStack(&BackStack))  //空栈，或空字符 
+        return ERROR;
+    while(*cur!='\0'){
+    	if(!isdigit(*cur) && (*cur)!='.'){
+    		if(cur>str && isdigit(*(cur-1))){      //输出数字 
+    			end = cur;
+    			memset(fnum,0, 10);
+    			memcpy(fnum, start, (end- start));
+    			for(i=0; i<(end-start); i++)
+    				printf("%c",fnum[i]);
+				printf(" ");
+			}
+			d.flag=1;
+			d.number.sign = *cur;
+			if (isdigit(*(cur + 1)))  //如果cur下一个是数字，就将start指向它 
+                start = cur + 1;
+            if (GetTop(BackStack, &top))
+            	pc = top.number.sign;
+            if (StackEmpty(BackStack) || pc == '(' || d.number.sign == '(')    //若是OperaSk为空或者栈顶为(或者获取的运算符为(,我们直接将这个运算符压栈
+                Push(&BackStack, d);
+            else if ((pc == '-' || pc == '+') && (d.number.sign == '*' || d.number.sign == '/'))    //若是栈顶的优先级低，也压栈，但是要先将栈顶的
+                Push(&BackStack, d);
+            else if (pc == d.number.sign || (pc == '-'&&d.number.sign == '+') || (pc == '+'&&d.number.sign == '-') || (pc == '*'&&d.number.sign == '/') || (pc == '/'&&d.number.sign == '*'))    //当栈顶优先级和当前运算符一致，先弹出到ResSk，在进行压栈
+                Push(&BackStack, d);
+            else {
+            	if(d.number.sign == ')'){
+            		while (pc!='('){
+            			printf("%c",pc);
+            			Pop(&BackStack, &top);
+            			pc = top.number.sign;
+					}
+				}
+				while((pc == '*' || pc == '/') && (d.number.sign == '-' || d.number.sign == '+')){
+					printf("%c",pc);
+					Pop(&BackStack, &top);
+					pc = top.number.sign;
+					continue;
+					}
+				}
+            
+			}
+			cur++;			
+		}
+		while (!StackEmpty(BackStack))    //将运算符栈中的剩余的数据全部移到结果栈
+    {
+        Pop(&BackStack, &top);
+        pc = top.number.sign;
+        printf("%c",pc);
+    }
+    DestroyStack(&BackStack);
 }

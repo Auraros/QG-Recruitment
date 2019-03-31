@@ -47,6 +47,7 @@ Status MatchBrack(char* str);    //匹配括号是否正确
 Status RotateStack(sqStack* s);    //将栈中的数据翻转
 Status GetMidStack(sqStack *s, char* str);    //获取中缀表达式,将字符串转换到栈中
 Status GetBackStack(sqStack *s);     //获取后缀表达式
+Status norGetBackStack(char *s); //获取正确的后缀表达式 
 Status GetBackValue(sqStack *s, double* val);//获取后缀表达式计算出来的结果 
 
 

@@ -82,7 +82,7 @@ void PrintStack(sqStack s){
         if (d.flag == 1) // 通过flag来判断，输出为数字还是字符 
             printf("%c", d.number.sign);
         else
-            printf("%lf", d.number.num);
+            printf("%.3lf", d.number.num);
     }
 }
 
