@@ -52,7 +52,7 @@ Status GetMidStack(sqStack *s, char* str){
 
     while (*cur != '\0'){    
         if (!isdigit(*cur) && *cur != '.'){  //判断cur不为数字，且不是点 
-            if (cur > str&&isdigit(*(cur - 1))){  //判断cur前一位数为数字 
+            if (cur > str && isdigit(*(cur - 1))){  //判断cur前一位数为数字 
                 end = cur;      //将end指向cur 
                 memset(fnum, 0, 10);  //清空fnum为0 
                 memcpy(fnum, start, (end - start)); //从start开始复制 
