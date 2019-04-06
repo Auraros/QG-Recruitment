@@ -26,7 +26,6 @@ void DestoryLQueue(LQueue *Q){  //摧毁队列
 	}
 	free(p);
 	free(Q->front);  //将队头指针和队尾指针释放 
-	free(Q->rear);
 	printf("\n摧毁队列成功。\n");
 } 
 

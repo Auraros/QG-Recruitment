@@ -141,7 +141,7 @@ int main() {
 		} 
 		switch(choice3){
 			case '1': {
-			DestoryLQueue(&Q);  //摧毁队列 
+			DestoryLQueue(&Q);  //摧毁队列  
 			flag=0;
 			break;}
 			case '2': IsEmptyLQueue(&Q);break;  // 判断队列是否为空 
