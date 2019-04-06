@@ -93,28 +93,36 @@ void ClearAQueue(AQueue *Q){   //清空队列
 	Q->rear = 0;
 	printf("清空队列成功。\n");
 } 
-
-Status TraverseAQueue(const AQueue *Q, void (*foo)(void *q, int size)){  //遍历函数操作 
+int flag;
+Status TraverseAQueue(const AQueue *Q, void (*foo)(void *q)){  //遍历函数操作 
 	if (Q->front == Q->rear){
 		printf("该队列为空。\n");
 		return FALSE;}
+	if (Q->length == sizeof(double))
+		flag = 1;
+	if (Q->length == sizeof(char))
+		flag = 2;
+	if (Q->length == sizeof (int))
+		flag = 3;
 	int i = Q->front + 1;
 	printf("\n");
-	while (i <= (MAXQUEUE - Q->front + Q->rear) % MAXQUEUE ) {  //如果i没有遍历到队尾 
-		foo(Q->data[i], Q->length);	
+	int a=0;
+	while (i <= (MAXQUEUE - Q->front + Q->rear) % MAXQUEUE  &&  a < MAXQUEUE-1 ) {  //如果i没有遍历到队尾 
+		foo(Q->data[i]);	
 		i = (i + 1) % MAXQUEUE;
+		a++;
 	}
 	printf("NULL");
 	printf("\n");
 	return TRUE;
 }
 
-void APrint(void *q, int size){  //打 印队列 
-	if(size == sizeof(char))    //根据储存不同的类型的变量来进行打印 
-		printf("%c", *(char*)q);
-	else if (size == sizeof(double))
-		printf("%lf", *(double*)q);
-	else if (size == sizeof(int))
-		printf("%d", *(int*)q);
+void APrint(void *q){  //打 印队列 
+	if (flag == 1)
+		printf("%lf", *(double *)q);
+	else if (flag == 2)
+		printf("%c", *(char *)q);
+	else if (flag == 3)
+		printf("%d", *(int *)q);
 	printf("-<");
 } 

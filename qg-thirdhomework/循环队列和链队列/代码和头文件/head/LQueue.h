@@ -122,7 +122,7 @@ void ClearLQueue(LQueue *Q);
  *    @return         : None
  *  @notice      : None
  */
-Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q, int size));
+Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q));
 
 /**
  *  @name        : void LPrint(void *q)
@@ -131,7 +131,7 @@ Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q, int size));
  
  *  @notice      : None
  */
-void LPrint(void *q, int size);
+void LPrint(void *q);
 
 /**************************************************************
  *    End-Multi-Include-Prevent Section

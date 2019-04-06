@@ -110,16 +110,22 @@ Status DeLQueue(LQueue *Q){   //出队
 	return TRUE;
 }
 
-
-Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q, int size)){ //遍历输出队列 
+int flag;
+Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q)){ //遍历输出队列 
 	if (Q->front == Q->rear){
 		printf("该队列为空队列。不能进行该操作。\n");
 		return FALSE;}
+		if (Q->length == sizeof(double))
+			flag = 1;
+		if (Q->length == sizeof(char))
+			flag = 2;
+		if (Q->length == sizeof (int))
+			flag = 3;
 		Node* p = (void *)malloc(Q->length); 
 		p = Q->front->next;  //p指向队头指针指向的节点 
 		printf("\n该队列的元素为：");
 		while (p != NULL) { 
-			foo(p->data, Q->length);
+			foo(p->data);
 			p = p->next;
 		}
 		printf("NULL\n");
@@ -127,12 +133,12 @@ Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q, int size)){ //遍历输
 }
 
 
-void LPrint(void *q, int size){
-	if (size == sizeof(double))
+void LPrint(void *q){
+	if (flag == 1)
 		printf("%lf", *(double *)q);
-	if (size == sizeof(char))
+	if (flag == 2)
 		printf("%c", *(char *)q);
-	if (size == sizeof (int))
+	if (flag == 3)
 		printf("%d", *(int *)q);
 	printf("-<");
 }
