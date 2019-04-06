@@ -23,6 +23,7 @@
  *    Struct Define Section
  **************************************************************/
 //链式队列结构
+#include <stdio.h>
 typedef struct node
 {
     void *data;                   //数据域指针
@@ -121,7 +122,7 @@ void ClearLQueue(LQueue *Q);
  *    @return         : None
  *  @notice      : None
  */
-Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q));
+Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q, int size));
 
 /**
  *  @name        : void LPrint(void *q)
@@ -130,7 +131,7 @@ Status TraverseLQueue(const LQueue *Q, void (*foo)(void *q));
  
  *  @notice      : None
  */
-void LPrint(void *q);
+void LPrint(void *q, int size);
 
 /**************************************************************
  *    End-Multi-Include-Prevent Section

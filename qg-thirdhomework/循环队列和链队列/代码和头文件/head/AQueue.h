@@ -27,12 +27,13 @@
  *    Struct Define Section
  **************************************************************/
 //循环队列结构
+#include<stdio.h>
 typedef struct Aqueue
 {
     void *data[MAXQUEUE];      //数据域
     int front;
     int rear;
-    unsigned int length;        //队列长度
+    size_t length;        //队列长度
 } AQueue;
 
 typedef enum
