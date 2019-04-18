@@ -262,11 +262,15 @@ def lwlrTest(testArr, xArr, yArr, k=1.0):
         k - 高斯核的k,自定义参数
     Returns:
         ws - 回归系数
+    Website:
+https://www.cuijiahua.com/
+    Modify:
+        2017-11-19
     """
-    m = np.shape(testArr)[0]  #计算测试数据集大小
+    m = np.shape(testArr)[0]                                            #计算测试数据集大小
     yHat = np.zeros(m)
     for i in range(m):                                                    #对每个样本点进行预测
-        yHat[i] = lwlr(testArr[i], xArr, yArr, k)
+        yHat[i] = lwlr(testArr[i],xArr,yArr,k)
     return yHat
 
 def rssError(yArr, yHatArr):
@@ -304,6 +308,12 @@ def testAlgrim():
     # print('')
     # print('训练集与测试集不同:简单的线性归回与k=1时的局部加权线性回归对比:')
     # print('k=1时,误差大小为:', rssError(AverageHousePrice[252:504], yHat1.T))
+    wMat = ridgeRegres(np.mat(influencingFactor[0:251]),np.mat(AverageHousePrice[0:251]).T)
+    m = np.shape(influencingFactor[252:504])[0]
+    yHat02 = np.zeros(m)
+    for i in range(m):
+        yHat02[i] = influencingFactor[252+i] *wMat
+    print('不用交叉验证的岭回归误差大小：', rssError(AverageHousePrice[252:504], yHat02))
     unReg = crossValidation(influencingFactor[0:251], AverageHousePrice[0:251], numVal=10)
     unReg = np.array(unReg)
     unReg = unReg.reshape(9,1)
