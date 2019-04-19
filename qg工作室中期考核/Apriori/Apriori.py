@@ -1,23 +1,20 @@
 # -*- coding:utf-8 -*-
-import math
-import random
 import warnings
-import operator
-import seaborn as sns
 import numpy as np
 import pandas as pd
-import matplotlib as mpl
+from time import time
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
-import matplotlib.patches as mpatchs
 
 warnings.filterwarnings('ignore')   #忽略警告
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 
 def loadDataSet():
+    #读入文件
     dataSet = pd.read_csv('agaricus-lepiota.data', ',', header=None)
+    #加上列名，便于操作
     dataSet = pd.DataFrame(data=np.array(dataSet),columns=['classes', 'cap-shape', 'cap-surface', 'cap-color', 'bruises', 'odor', 'gill-attachment', 'gill-spacing', 'gill-size', 'gill-color', 'stalk-shape','stalk-root', 'stalk-surface-above-ring', 'stalk-surface-below-ring', 'stalk-color-above-ring', 'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type', 'spore-print-color', 'population', 'habitat'], index=range(8124))
+
     model_label01 = dataSet["classes"].replace({"e": '1', "p":'2' })
     model_label02 = dataSet["cap-shape"].replace({"b":'3', "c":'4', "x":'5', "f":'6', "k":'7', "s":'8'})
     model_label03 = dataSet["cap-surface"].replace({"f":'9', "g":'10', "y":'11', "s":'12'})
@@ -149,6 +146,9 @@ if __name__ == '__main__':
     dataSet = loadDataSet()
     dataSet = dataSet.values
     dataSet = dataSet.tolist()
+    t1 = time()
     L, suppData = apriori(dataSet, minSupport=0.7)
     rules = generateRules(L, suppData, minConf=0.7)
-    print(rules)
+    t2 = time()
+    time = t2 - t1
+    print(f"耗时：{time}秒")

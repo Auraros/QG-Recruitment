@@ -147,6 +147,6 @@ def colcPer(attributes):
 if __name__ == '__main__':
     df = "iris.data"      #文件路径
     attributes, labels = loadDataSet(df)   #得到特征矩阵和标签变量
-    # showdatas(attributes, labels)      #输出相关的散点图
+    showdatas(attributes, labels)      #输出相关的散点图
     normAttributes = autoNorm(attributes)  #进行归一化处理
     colcPer(normAttributes)    #计算相关系数

@@ -1,13 +1,10 @@
 # -*- coding:utf-8 -*-
-import math
 import warnings
 import operator
 import numpy as np
 import pandas as pd
-import matplotlib as mpl
+from time import time
 import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
-import matplotlib.patches as mpatchs
 
 warnings.filterwarnings('ignore')   #忽略警告
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
@@ -200,4 +197,9 @@ def adjustK(x_test, x_train, y_test, y_train, nunTestVecs):
     return best_k
 
 if __name__ == "__main__":
-    datingClassTest()
+    time1 = time()
+    # datingClassTest() #测试数据集
+    classifyPerson()   # 使用数据集
+    time2 = time()
+    time = time2 - time1
+    print(f"耗时：{time}秒")

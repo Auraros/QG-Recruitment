@@ -58,7 +58,7 @@ def distEclud(X,Y):
     """
     return np.sqrt(np.sum((X-Y)**2))
 
-def randCent1(dataSet, k):
+def randCent(dataSet, k):
     """
     函数说明：为给定数据集构建一个包含k个随机质点的集合
     :param dataSet: 数据集
@@ -118,7 +118,7 @@ def KMeans(dataSet, k, distMeas=distEclud, createCent=randCent):
             if clusterAssment[i, 0] != minIndex:  #当前聚类结果中第i个样本的结果发生变化
                 clusterChange = True    #把clusterChange定义为Ture，代表发生了变化
             clusterAssment[i, :] = minIndex, minDist**2     #更新当前新变化的聚类结果和错误平方
-        print(centroids)             #打印kmeans聚类质心
+             #打印kmeans聚类质心
         for j in range(k):                #遍历每一个质心
             #因此首先先比较clusterAssment[:,0].A==cent的真假，如果为真则记录了他所在的行，因此在用切片进行取值。
             pointsInCluster = dataSet[np.nonzero(clusterAssment[:, 0].A == j)[0]]
@@ -151,3 +151,4 @@ if __name__ == '__main__':
     attributes, label = loadDataSet(filename)
     normAttribute, ranges, minVal = autoNorm(attributes)
     centroids, clusterAssment = KMeans(normAttribute, 3)
+    print(clusterAssment)
